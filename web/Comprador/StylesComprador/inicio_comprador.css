@@ -1,0 +1,130 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* Contenedor de los botones e imagenes */
+.car{
+    border-radius: 5%;
+    align-items: center;
+    background-color: #D9D9D9;
+    margin-top: 3rem;
+    width: 14rem
+}
+
+/* Contenedor de la imagen */
+.rectangulo {
+    width: 100%; /* Ancho del rectángulo (50% del contenedor padre) */
+    background-color: #b9b9b9; /* Color de fondo del rectángulo */
+    display: flex; /* Usa flexbox para centrar contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100%; /* Ocupa toda la altura del contenedor */
+    margin-top: 10%;
+    border-radius: 5%;
+}
+
+/* Se adapta la imagen al tamaño del contenedor */
+.rectangulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Botón que tiene el conteneddor de la imagen y la imagen */
+.button-with-image {
+    color: white; /* Color del texto */
+    border: none; /* Elimina el borde del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+/* Contenedor de la imagen de la ventana emergente */
+.fig {
+    margin-top: 3rem;
+    width: 130%; /* Establece el ancho al 100% para que sea responsivo */
+    max-width: 400px; /* Define un ancho máximo para evitar que la imagen se agrande demasiado en pantallas grandes */
+    height: 20rem; /* Ajusta automáticamente la altura para mantener la proporción original */
+    margin-top: 9px;
+    background-color: #D9D9D9;
+    margin-left: 40px;
+    border-radius: 10px;
+    margin-right: 1.5rem;
+}
+
+/* Se adapta la imagen al contenedor */
+.fig img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Contenedor de la ficha técnica de la obra */
+.tex {
+    width: 130%; /* Establece el ancho al 100% para que sea responsivo */
+    max-width: 400px; /* Define un ancho máximo para evitar que la imagen se agrande demasiado en pantallas grandes */
+    height: 20rem; /* Ajusta automáticamente la altura para mantener la proporción original */
+    margin-top: 6rem;
+    margin-left: 40%;
+    border-radius: 10px;
+    margin-right: 1.5rem;
+}
+
+/* Clase de los parrafos */
+.t{
+    margin-bottom: 1rem;
+}
+
+/* Botones de comprar */
+.btns{
+    color: white;
+    background-color: #00ad00;
+    border: none;
+}
+
+/* Botones de negociar */
+.btns1{
+    color: #39A900;
+    background-color: white;
+    border-color: #39A900;
+}
+
+/* Se elige el color de la ventana emergente */
+.modal-content{
+    background-color: #EEEEEE
+}
+
+modal-body{
+    height: 50rem;
+    padding: 0rem !important;
+}
+
+/* Media query para ajustar el tamaño de la figura en pantallas más pequeñas */
+@media (max-width: 768px) {
+    .fig {
+        max-width: 80%; /* Utiliza el ancho completo en pantallas más pequeñas */
+        margin: 9px auto; /* Centra horizontalmente en pantallas más pequeñas */
+        margin-right: 1.5rem;
+        margin-left: 1.5rem;
+    }
+
+    .tex {
+        margin-left: 25%;
+        border-radius: 10px;
+        margin-right: 1.5rem;
+    }
+
+    .rectangulo {
+        width: 100%; /* Ancho del rectángulo (50% del contenedor padre) */
+        background-color: #b9b9b9; /* Color de fondo del rectángulo */
+        display: flex; /* Usa flexbox para centrar contenido */
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        height: 100%; /* Ocupa toda la altura del contenedor */
+        margin-top: 10%;
+        border-radius: 5%;
+    }
+}

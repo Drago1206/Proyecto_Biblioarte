@@ -1,0 +1,29 @@
+body{
+    background-image: url("../img/biblio.png");
+    background-repeat:repeat;
+    background-size: cover;
+    font-family: 'Josefin Sans', sans-serif;
+}
+.container-fluid{
+    background: #00AD00;
+    padding: 10px;
+}
+/* Logo Sena */
+img{
+    width:90px;
+    height: 60px;
+}
+/* Botones */
+.btn{
+    background-color: #008700;
+    color: white;
+    border: none;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+p{
+    padding-top: 280px;
+}
+
+
+

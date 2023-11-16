@@ -1,0 +1,86 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+
+body{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+.card{
+    border: none;
+}
+
+.rectangulo {
+    width: 10rem;
+    height: 10rem;
+    background-color: #D9D9D9;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.rectangulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.icon1 {
+    max-width: 100%;
+    height: auto;
+    margin-top:3rem;
+}
+
+.icon2 {
+    max-width: 100%;
+    height: auto;
+    margin-top:3rem;
+}
+
+.icon3 {
+    max-width: 100%;
+    height: auto;
+    margin-top:3rem;
+}
+.row {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.col-md-6 {
+    flex: 0 0 auto;
+    width: 17%; 
+}
+
+.ob{
+    margin-top: 2rem;
+    margin-left: 16rem;
+}
+@media(max-width:900px){
+
+    .rectangulo {
+        width: 10rem;
+        height: 10rem;
+        background-color: #D9D9D9;
+        border-radius: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    
+    .rectangulo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+

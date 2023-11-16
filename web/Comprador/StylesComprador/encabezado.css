@@ -1,0 +1,82 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 28/09/2023, 05:58:03 PM
+    Author     : jhoan
+*/
+body{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.container-fluid{
+    padding: 10px;
+}
+
+
+/* Logo SENA */
+img{
+    width:20px;
+    height: 20px;
+}
+
+/* Encabezado */
+.navbar{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.row {
+    --bs-gutter-x: 0rem;
+}
+/* ayuda a la separación de los items del encabezado */
+.navbar-collapse{
+    flex-grow: 0.2;
+}
+
+/* Imagen del perfil y titulo del proyecto */
+.navbar-brand {
+    margin-left: 200px;
+}
+
+.mt-5 {
+    margin-top: 3rem!important;
+}
+
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 1px 2px 2px rgb(85, 85, 85);
+    overflow: hidden;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    padding: 1px 20px;
+    width: 200px;
+    border-radius: 30px;
+    font-size: 16px;
+}
+
+.search-button {
+    background-color: #00AD00;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+}
+
+.search-button i {
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Añade estilos para el icono de lupa según la librería de íconos que estés utilizando (en este caso, FontAwesome). */
+
+
+

@@ -1,0 +1,84 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+
+/* Tipografía que se usará en el proyecto */
+body{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Cuerpo de la tarjeta con esto se ajusat el tamaño de la tarjera y sus margenes */
+.card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+
+/* Le quitamos el borde a la tarjera */
+.card{
+    border: none;
+}
+
+
+/* Ajustamos los tamaños al contenedor de la imagen de perfil */
+.rectangulo {
+    margin-top: 80rem;
+    width: 50%; /* Ancho del 50% del contenedor padre */
+    background-color: #D9D9D9;
+    border-radius: 100%; /* Para hacer un círculo */
+    margin: auto; /* Centrar horizontalmente y agregar espacio arriba y abajo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10rem;
+    overflow: hidden;
+}
+
+/* Se ajusta la imagen al contenedor */
+.rectangulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.col-3 {
+    flex: 0 0 auto; /*Esto establece las propiedades flexibles del elemento con la clase .col-3*/
+    width: 60%; /* Establece el ancho del elemento con la clase .col-3 al 60% del ancho de su contenedor principal */
+}
+
+/* Formulario */
+form {
+    display: flex; /*  Hace que el formulario y sus elementos secundarios se comporten como un contenedor flexible */
+    margin-top: 0rem; /*  Establece el margen superior del formulario en 0 em */
+}
+
+/* Botón para enviar los cambios realizados */
+.bt{
+    margin-top: 2rem;
+    background-color: #00AD00;
+    padding: 0.5rem;
+    border-radius: 5px;
+    color: white;
+}
+
+/* Contenedor del input y su respectivo lavel */
+.espaci{
+    padding-bottom: 1rem ;
+}
+
+
+@media (max-width: 768px) {
+    /* Ajustamos los tamaños al contenedor de la imagen de perfil */
+.rectangulo {
+    margin-top: 100rem;
+    width: 50%; /* Ancho del 50% del contenedor padre */
+    border-radius: 100%; /* Para hacer un círculo */
+    margin-left: 1rem;
+}
+} 
+
+
+
+
+
