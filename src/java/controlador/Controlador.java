@@ -216,7 +216,7 @@ public class Controlador extends HttpServlet {
                 System.out.println("myString es de tipo " +  ((Object)art).getClass().getSimpleName());
                
                 sesion.setAttribute("Id", idUsuario);
-                this.getServletConfig().getServletContext().getRequestDispatcher("/Comprador/inicio_comprador.jsp").forward(request, response);
+                this.getServletConfig().getServletContext().getRequestDispatcher("/Mv_Usuarios?menu=Compradores&accion=Cargar_ob").forward(request, response);
             
             /* Entra en el bloque else si el usuario no es ni administrador, ni artista, ni comprador. 
                 Configura la solicitud para despachar a "inicio.jsp" y establece un atributo de error. */    

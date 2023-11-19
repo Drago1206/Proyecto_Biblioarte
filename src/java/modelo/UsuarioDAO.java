@@ -328,6 +328,45 @@ public class UsuarioDAO {
     }
         return art;
     }
+    public Obras categoria_name(String name ){
+        
+        Connection cn = null;
+        Conexion con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Obras obr = new Obras();
+        
+        // Consulta SQL para obtener información detallada de un artista por su ID.
+        String sql ="SELECT `Nro_Categoria` FROM `tb_categoria_obra` WHERE  `Nombre_categoria` ="+name;
+        con = new Conexion();
+        cn= con.Conexion();
+        
+         try{
+             // Imprime la consulta SQL en la consola (útil para propósitos de depuración).
+        System.out.println(sql);
+
+        // Luego, prepara la sentencia SQL usando PreparedStatement
+        ps = cn.prepareStatement(sql);
+        
+
+        // Ejecuta la consulta
+        rs = ps.executeQuery();
+         
+        // Itera a través de los resultados obtenidos.
+        while(rs.next()){
+            
+            obr.setNro_categoria(rs.getInt("Nro_Categoria"));
+            
+        }
+        }catch(Exception e){
+            // En caso de excepción, imprime el mensaje de error.
+            System.out.println("Error" + e.getMessage());
+        }  finally {
+        // Asegúrate de cerrar los recursos (ResultSet, PreparedStatement y Connection)
+       
+    }
+        return obr;
+    }
     
     public Compradores Listar_idComp(int id){
         // Declaraciones para la conexión a la base de datos.
@@ -531,7 +570,7 @@ public class UsuarioDAO {
       
         
         
-        String sql = "UPDATE `tb_artista` SET `NombreUsuario`=?,`CorreoUsuario`=?,`Telefono`=?,`Pseudonombre`=?,`Imagen_perfil`=?  WHERE `IdUsuario_fk` ="+comp.getIdUsuario();
+        String sql = "UPDATE `tb_comprador` SET `NombreUsuario`=?,`CorreoUsuario`=?,`Telefono`=?,`Pseudonombre`=?,`Imagen_perfil`=?  WHERE `IdUsuario_fk` ="+comp.getIdUsuario();
         System.out.println(sql);
         con = new Conexion();
         cn= con.Conexion(); 
@@ -548,6 +587,7 @@ public class UsuarioDAO {
             
             
             ps.executeUpdate();
+            System.out.print("se actualizo la info del comp");
  
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -578,7 +618,7 @@ public class UsuarioDAO {
     
   
      public Obras Agregar_obras(Obras obr){
-             Connection cn = null;
+        Connection cn = null;
         Conexion con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -588,22 +628,22 @@ public class UsuarioDAO {
         
        
         String sql = "INSERT INTO `tb_obras_art`(`img_obra`, `Id_usu_Art`, `Nombre_Obra`, `Descripcion_Obra`, `Tecnica`, `Nro_categoria_fk`, `Valor_obra`, `Modo_venta`, `NroDocumento`) "
-                + "VALUES ('?','?','?','?','?','?','?','?','?')";
+                + "VALUES (?,?,?,?,?,?,?,?,?)";
         try{
            // Crea una nueva instancia de Conexion
         con = new Conexion();
         cn= con.Conexion();
         ps = cn.prepareStatement(sql);
-            ps.setInt(1, obr.getId_obra());
-            ps.setString(2, obr.getUrl());
-            ps.setInt(3, obr.getArtista().getIdUsuario());
-            ps.setString(4, obr.getNombre_obra());
-            ps.setString(5, obr.getDescripcion_obra());
-            ps.setString(6, obr.getTecnica());
-            ps.setInt(7, obr.getNro_categoria());
-            ps.setFloat(8, obr.getValor_obra());
-            ps.setString(9, obr.getModo_vent());
-            ps.setInt(10, obr.getArtista().getNroDocumento());
+            
+            ps.setString(1, obr.getUrl());
+            ps.setInt(2, obr.getArtista().getIdUsuario());
+            ps.setString(3, obr.getNombre_obra());
+            ps.setString(4, obr.getDescripcion_obra());
+            ps.setString(5, obr.getTecnica());
+            ps.setInt(6, obr.getNro_categoria());
+            ps.setFloat(7, obr.getValor_obra());
+            ps.setString(8, obr.getModo_vent());
+            ps.setInt(9, obr.getArtista().getNroDocumento());
             
             ps.executeUpdate();
             System.out.print("Se ejecuto las consultas de insertar obra");
@@ -824,6 +864,111 @@ public class UsuarioDAO {
         return 0;
        
         
+    }
+    
+    
+    public subastas Agregar_subastas(subastas sub){
+        Connection cn = null;
+        Conexion con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Artistas art = new Artistas();
+        Ventas_realizadas vent = new Ventas_realizadas();
+        
+       
+        String sql = "INSERT INTO `tb_subastas`( `Valor_Ofrecido`, `Valor_Inicial`, `fecha_subasta`, `Id_usu_artista_fk`, `Id_obra_fk`, `Id_usu_comprador_fk`) "
+                + "VALUES (?,?,?,?,?,?)";
+        try{
+           // Crea una nueva instancia de Conexion
+        con = new Conexion();
+        cn= con.Conexion();
+        ps = cn.prepareStatement(sql);
+            
+            ps.setFloat(1, sub.getValor_Ofrecido());
+            ps.setFloat(2, sub.getValor_Ini());
+            ps.setString(3, sub.getFecha_actual());
+            ps.setString(4, sub.getIdArt());
+            ps.setInt(5, sub.getIdObras());
+            ps.setString(6, sub.getIdComp());
+            
+            ps.executeUpdate();
+            System.out.print("Se ejecuto las consultas de insertar obra");
+            
+        }catch(SQLException ex){
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
+    
+    public subastas Listar_subastas(String Documento){
+    
+        Connection cn = null;
+        Conexion con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Obras obras = new Obras();
+        subastas sub = new subastas();
+        
+        String sql ="SELECT S.id_subasta, S.Valor_Ofrecido, S.Id_obra_fk, S.Valor_Inicial , S.fecha_subasta, Obr.Nombre_Obra, Obr.img_obra, Obr.Tecnica, Obr.Modo_venta, Obr.Valor_obra, Art.NombreUsuario, Art.NroDocumento_fk, Art.Telefono,  Art.Nombre_Ficha,  Art.Imagen_perfil, Comp.NombreUsuario, Comp.NroDocumento_fk, Comp.Telefono, Comp.Imagen_perfil FROM tb_subastas S " +
+        "INNER JOIN  tb_artista Art ON Art.NroDocumento_fk = S.Id_usu_artista_fk" +
+        "INNER JOIN tb_comprador Comp ON Comp.NroDocumento_fk = S.Id_usu_comprador_fk" +
+        "INNER JOIN tb_obras_art Obr ON Obr.id_obra = S.Id_obra_fk" +
+        "WHERE Comp.NroDocumento_fk ="+Documento;
+        System.out.print(sql);
+        
+        con = new Conexion();
+        cn= con.Conexion();
+        
+          try{
+        cn= con.Conexion();
+        ps = cn.prepareStatement(sql);
+        rs= ps.executeQuery();
+        
+        
+        
+        while(rs.next()){
+            
+            System.out.print("Si esta bien la consulta");
+            
+            Artistas art= new Artistas();
+            Compradores comp = new Compradores();
+            
+            
+            
+            obras.setNombre_obra(rs.getString("Obr.Nombre_Obra"));
+            obras.setUrl(rs.getString("Obr.img_obra"));
+            obras.setTecnica(rs.getString("Obr.Tecnica"));
+            obras.setModo_vent(rs.getString("Obr.Modo_venta"));
+            obras.setValor_obra(rs.getFloat("Obr.Valor_obra"));
+            sub.setObras(obras);
+            
+            
+            art.setNombreUsuario(rs.getString("Art.NombreUsuario"));
+            sub.setIdArt(rs.getString("Art.NroDocumento_fk"));
+            art.setImg_perfil(rs.getString("Art.Imagen_perfil"));
+            art.setTelefono(rs.getString("Art.Telefono"));
+            art.setNombre_Ficha(rs.getString("Art.Nombre_Ficha"));
+            sub.setArt(art);
+            
+            comp.setNombreUsuario(rs.getString("Comp.NombreUsuario"));
+            sub.setIdComp(rs.getString("Comp.NroDocumento_fk"));
+            comp.setTelefono(rs.getString("Comp.Telefono"));
+            comp.setImg_perfil(rs.getString("Comp.Imagen_perfil"));
+            
+            sub.setIdsubasta(rs.getInt("S.id_subasta"));
+            sub.setValor_Ofrecido(rs.getFloat("S.Valor_Ofrecido"));
+            sub.setIdObras(rs.getInt("S.Id_obra_fk"));
+            sub.setValor_Ini(rs.getFloat("S.Valor_Inicial"));
+            sub.setFecha_actual(rs.getString("S.fecha_subasta"));
+
+             
+        }
+        }catch(Exception e){
+            System.out.println("Error" + e.getMessage());
+        } 
+        return sub;
+    
     }
     
     public List<Ventas_realizadas> Ventas(String name){

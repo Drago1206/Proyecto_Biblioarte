@@ -79,8 +79,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <li><a class="dropdown-item" href="Comprador/Perfil.jsp" ><img class="icon" src="Comprador/Iconos/mi_cuenta.png">  Mi cuenta</a></li>
 
                             <li><a class="dropdown-item" href="Comprador/Configuracion.jsp"><img class="icon"  src="Comprador/Iconos/Config.png" >  Configuracion</a></li>
-
-                            <li><a class="dropdown-item" href="Comprador/subastas.jsp"><img class="icon"  src="Comprador/Iconos/negocia.png" >  Negociaciones</a></li>
+                            
+                            <li><a class="dropdown-item" href="Comprador/subastas.jsp"><img class="icon"  src="Comprador/Iconos/negocia.png" >  Subastas</a></li>
+                            
+                            <li><a class="dropdown-item" href="Mv_Usuarios?menu=Compradores&accion=verlistado"><img class="icon"  src="negocia.png" >  Carrito de compras</a></li>
                             
                             <li><a class="dropdown-item" href="/../inicio.jsp"><img class="icon"  src="Comprador/Iconos/cerrar-sesion.png" >  Salir</a></li>
                         </ul>
@@ -90,124 +92,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </div>
     </nav>
 
-
-    <div class="container">
-        
-        <!-- FILA 1 -->
-               <div class="row">
-            <c:forEach var="obr" items="${Obr}">
-            <div class="col-md-3">
-                <button class="car button-with-image"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="car button-with-image"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="car button-with-image"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <div class="rectangulo">
-                        <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="car button-with-image"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-        </div>
-
-
-
-        <!-- FILA 2 -->
+    <div class="row">
+         <c:forEach var="obr" items="${Obr}" varStatus="loopStatus">
+        <c:if test="${loopStatus.index % 4 == 0}">
         <div class="row">
-            <div class="col-md-3">
-                <button class="car button-with-image">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="car button-with-image">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="car button-with-image">
-                    <div class="rectangulo">
-                       <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="car button-with-image">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-            </div>
-        </div>
+        </c:if>
 
-
-        <!-- FILA 3 -->
-            <div class="row">
-            <div class="col-md-3">
-                <button class="car button-with-image">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
+    <div class="col-md-3">
+        <button class="car button-with-image" data-bs-toggle="modal" data-bs-target="#staticBackdrop${obr.id_obra}">
+            <div class="rectangulo">
+                <img src="${obr.getUrl()}" alt="Descripción de la imagen">
             </div>
-            <div class="col-md-3">
-                <button class="car button-with-image">
-                    <div class="rectangulo">
-                         <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                </button>
-                </div>
-                <div class="col-md-3">
-                    <button class="car button-with-image">
-                        <div class="rectangulo">
-                            <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                    </button>
-                </div>
-                <div class="col-md-3">
-                    <button class="car button-with-image " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <div class="rectangulo">
-                             <img src="${obr.getUrl()}" alt="Descripción de la imagen">
-                    </div>
-                    <h6>${obr.getNombre_obra()}</h6>
-                    </button>
-                </div>
-            </div>
-
+            <h6>${obr.getNombre_obra()}</h6>
+        </button>
     </div>
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <!-- Modal correspondiente a la obra actual -->
+ <div class="modal fade" id="staticBackdrop${obr.id_obra}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!-- Contenido del modal -->
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -226,22 +128,36 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <p class="t">${obr.getDescripcion_obra()}</p>
                                 <p class="t">${obr.getValor_obra()}</p>
                                 <div>
-                                    <button class="btns shadow p-2 mb-5 bg-body rounded" href="compra.jsp">Comprar</button>
-                                    <button class="btns shadow p-2 mb-5 bg-body rounded">Negociar</button>
+                                   <c:choose>
+                                        <c:when test="${obr.getModo_vent() eq 'VentaDirecta'}">
+                                            <a class="btns shadow p-2 mb-5 bg-body rounded" href="Comprador/carrito_compras.jsp">Comprar</a>
+                                            <a class="btns shadow p-2 mb-5 bg-body rounded" href="Mv_Usuarios?menu=Compradores&accion=AgregarCarrito&id=${obr.id_obra}">Añadir al carrito</a>
+                                        </c:when>
+                                        <c:when test="${obr.getModo_vent() eq 'Subasta'}">
+                                            <a class="btns shadow p-2 mb-5 bg-body rounded" href="Mv_Usuarios?menu=Compradores&accion=PropuestaSubasta&id=${obr.id_obra}">Negociar</a>
+                                        </c:when>
+                                   </c:choose>
                                 </div>
                             </div>
                         </div>
-                        </c:forEach>
-                    </div>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <c:if test="${loopStatus.index % 4 == 3 || loopStatus.last}">
+        </div> <!-- Cierra la fila actual -->
+    </c:if>
+</c:forEach>   
+        
+    </div>
+
+    
+    
     
    
-</div>
+
 
     </body>
 </html>

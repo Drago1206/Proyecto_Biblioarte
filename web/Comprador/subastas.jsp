@@ -24,6 +24,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;1,400&display=swap" rel="stylesheet">    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+        
+        <script>
+            console.log("Valor de ofertaExitosa:", ${ofertaExitosa});
+        </script>
+    
+    
+        <c:if test="${not empty ofertaExitosa and ofertaExitosa}">
+    <script>
+        $(document).ready(function () {
+            $('#ofertaExitosaModal').modal('show');
+        });
+    </script>
+        </c:if>
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -97,23 +111,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <!-- <div class="card-body"> -->
                             <div class="card ">
                                 <div class="espaci position-absolute top-20 start-50" style="display: flex; align-items: center;">
-                                    <p class="text" style="color: #00AD00; margin-right: 10px;">Obra a comprar</p>
+                                    <p class="text" style="color: #00AD00; margin-right: 10px;">Obra a Negociar</p>
+                                    
+                                    <p class="text" style="color: #00AD00; margin-right: 10px;">${ObrasSubasta.getNombre_obra()}</p>
+                                     
+                                     <img src="${ObrasSubasta.getUrl()}" width="100px" height="110px">
                                 </div>
                                 <div class="card-body">
-                                    <form action="Mv_Usuarios?Menu=comprador&accion=subasta" method="post">
+                                    <form action="../Mv_Usuarios?menu=Compradores&accion=subastainsert&fecha=${ObrasSubasta.getFecha_subasta()}&valorIni=${ObrasSubasta.getValor_obra()}" method="post">
                                         <div class="rectangulo">
 
                                         </div>
                                         <div class="coont container">
                                             <div class="mb-3">
+                                                <input type="text" hidden name="txtIdComp" value="${Comp.getNroDocumento()}">
+                                                <input type="text" hidden name="txtIdArt" value="${ObrasSubasta.getArtista().getNroDocumento()}">
+                                                <input type="text" hidden name="txtIdObr" value="${ObrasSubasta.getId_obra()}">
+                                                
 
                                                 <div class="espaci mb-3" style="display: flex; align-items: center;">
                                                     <p style="margin-right: 10px;">Fecha de subasta</p>
-                                                    <input type="date" class="form-control" name="txtSubasta" id="exampleInputPassword1" placeholder="Fecha de Subasta">
+                                                    
+                                                    <h6>${ObrasSubasta.getFecha_subasta()}</h6>
                                                 </div>
                                                 <div class="espaci mb-3" style="display: flex; align-items: center;">
                                                     <p style="margin-right: 10px;">Valor inicial</p>
-                                                    <input type="number" class="form-control" name="ValorInicial"id="exampleInputPassword1" placeholder="El valor que inicia la subasta">
+                                                    <h6>${ObrasSubasta.getValor_obra()}</h6>
                                                 </div>
                                                 <div class="espaci mb-3" style="display: flex; align-items: center;">
                                                     <p style="margin-right: 10px;">Valor a ofertar</p>
@@ -137,9 +160,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </div>
             </div>
         </div>
+            <div class="modal fade" id="ofertaExitosaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Oferta Exitosa</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ¡Tu oferta se ha enviado con éxito!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>                                       
     </section>
 
 
+          
 </body>
 </html>
 <%}else{

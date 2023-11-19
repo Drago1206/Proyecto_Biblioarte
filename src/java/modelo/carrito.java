@@ -4,66 +4,35 @@
  */
 package modelo;
 
-import java.io.Serializable;
-
 /**
  *
  * @author jhoan
  */
-public class Obras implements Serializable{
-    
-    int id_obra, id_usu_art, Nro_categoria;
+public class carrito {
+     int id_obra, id_usu_art, Nro_categoria,cantidad;
 
-    String Nombre_obra, Descripcion_obra, Tecnica,Url,Modo_vent,fecha_subasta;
-    float valor_obra;
+    String Nombre_obra, Descripcion_obra, Tecnica,Url,Modo_vent;
+    float valor_obra, subtotal;
     Artistas artista;
+    Compradores comprador;
 
-    public String getFecha_subasta() {
-        return fecha_subasta;
-    }
-
-    public void setFecha_subasta(String fecha_subasta) {
-        this.fecha_subasta = fecha_subasta;
-    }
-    
-    
-
-    public String getModo_vent() {
-        return Modo_vent;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setModo_vent(String Modo_vent) {
-        this.Modo_vent = Modo_vent;
-    }
-    
-    
-    public String getUrl() {
-        return Url;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public void setUrl(String Url) {
-        this.Url = Url;
-    }
-    
-    
-    
-    public String getTecnica() {
-        return Tecnica;
+    public float getSubtotal() {
+        return subtotal;
     }
 
-    public void setTecnica(String Tecnica) {
-        this.Tecnica = Tecnica;
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
     }
- 
 
     
-    public Artistas getArtista() {
-        return artista;
-    }
-
-    public void setArtista(Artistas artista) {
-        this.artista = artista;
-    }
     
     public int getId_obra() {
         return id_obra;
@@ -105,6 +74,30 @@ public class Obras implements Serializable{
         this.Descripcion_obra = Descripcion_obra;
     }
 
+    public String getTecnica() {
+        return Tecnica;
+    }
+
+    public void setTecnica(String Tecnica) {
+        this.Tecnica = Tecnica;
+    }
+
+    public String getUrl() {
+        return Url;
+    }
+
+    public void setUrl(String Url) {
+        this.Url = Url;
+    }
+
+    public String getModo_vent() {
+        return Modo_vent;
+    }
+
+    public void setModo_vent(String Modo_vent) {
+        this.Modo_vent = Modo_vent;
+    }
+
     public float getValor_obra() {
         return valor_obra;
     }
@@ -112,4 +105,23 @@ public class Obras implements Serializable{
     public void setValor_obra(float valor_obra) {
         this.valor_obra = valor_obra;
     }
+
+    public Artistas getArtista() {
+        return artista;
+    }
+
+    public void setArtista(Artistas artista) {
+        this.artista = artista;
+    }
+
+    public Compradores getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(Compradores comprador) {
+        this.comprador = comprador;
+    }
+    
+    
+    
 }

@@ -16,6 +16,10 @@
         <servlet-name>Obr</servlet-name>
         <servlet-class>controlador.Obr</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Script</servlet-name>
+        <servlet-class>controlador.Script</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Obr</servlet-name>
         <url-pattern>/Obr</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Script</servlet-name>
+        <url-pattern>/Script</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

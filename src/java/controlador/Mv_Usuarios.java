@@ -7,6 +7,9 @@ package controlador;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +25,8 @@ import modelo.Compradores;
 import modelo.Obras;
 import modelo.Usuario;
 import modelo.UsuarioDAO;
+import modelo.carrito;
+import modelo.subastas;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -35,6 +40,7 @@ La anotación @WebServlet se utiliza en aplicaciones web Java para definir un se
 Esto significa que Mv_Usuarios es un servlet que manejará las solicitudes HTTP. */
 public class Mv_Usuarios extends HttpServlet {
     public static int idUsu;
+    String DocumentoComp;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,6 +64,7 @@ public class Mv_Usuarios extends HttpServlet {
                 
                 /* Obtiene el valor del parámetro "accion" de la solicitud HTTP y lo guarda en la variable accion. */
                 String accion = request.getParameter("accion"); 
+                
         
         /* Crea una instancia de la clase Artistas. */
         Artistas art = new Artistas();
@@ -68,6 +75,7 @@ public class Mv_Usuarios extends HttpServlet {
         /* Crea una instancia de la clase UsuarioDAO. 
         Parece ser un objeto que maneja las operaciones relacionadas con la base de datos para usuarios. */
         UsuarioDAO usudao = new UsuarioDAO();
+        
             
             /*  Verifica si la variable menu no es nula. */
             if(menu != null){
@@ -139,7 +147,7 @@ public class Mv_Usuarios extends HttpServlet {
                             case "crear":
                                 
                                 /* Imprime en la consola el nombre de la obra obtenido del parámetro "txtNameObr" de la solicitud. */
-                                System.out.print("Nombre obra: "+request.getParameter("txtNameObr"));
+                                
                                 
                                 /* Crea una nueva instancia de la clase Obras para representar la obra que se está creando. */
                                 Obras obras = new Obras();
@@ -155,14 +163,14 @@ public class Mv_Usuarios extends HttpServlet {
                                
                                 /*  Imprime en la consola el ID del usuario artista. */
                                 System.out.print("El id del usuario en crear es: "+idUsu);
-                                artista.setNroDocumento(Integer.parseInt(request.getParameter("cc")));
+                                artista.setNroDocumento(Integer.parseInt(request.getParameter("Documento")));
                                 
                                 /* Imprime en la consola el documento del artista*/
                                 System.out.print("El documento del artista es: "+artista.getNroDocumento());
                                 obras.setArtista(artista);
                                 
                                 /*  Establece el nombre de la obra con el valor obtenido del parámetro "txtNameObr" de la solicitud. */
-                                obras.setNombre_obra(request.getParameter("NameObr"));
+                                obras.setNombre_obra(request.getParameter("NomObr"));
                                 
                                 /* Establece la técnica de la obra con el valor obtenido del parámetro "txtTecnica" de la solicitud. */
                                 obras.setTecnica(request.getParameter("Tecnica"));
@@ -173,24 +181,24 @@ public class Mv_Usuarios extends HttpServlet {
                                
 
                                 // Obtén el valor específico de txtPrecio
-                                String txtPrecioValue = request.getParameter("Precio");
+                                String PrecioValue = request.getParameter("Precio");
                                 
                                 /* Verifica si txtPrecioValue no es nulo. Si no es nulo, convierte su valor a un tipo de dato float 
                                 y lo establece como el valor de la obra (obras.setValor_obra). En caso contrario, imprime en la consola
                                 el mensaje "precio: " seguido del valor obtenido directamente de la solicitud. */
-                                if (txtPrecioValue != null) {
-                                    obras.setValor_obra(Float.parseFloat(txtPrecioValue));
+                                if (PrecioValue != null) {
+                                    obras.setValor_obra(Float.parseFloat(PrecioValue));
                                 } else {
                                     System.out.print("precio:  "+request.getParameter("Precio"));
                                 }
                                 
                                 /* Establece el número de categoría de la obra con el valor obtenido del parámetro 
                                 "txtCategoria" de la solicitud, después de convertirlo a un tipo de dato int. */
-                                //obras.setNro_categoria(Integer.parseInt(request.getParameter("Categoria")));
+                                obras.setNro_categoria(Integer.parseInt(request.getParameter("Categoria")));
                                 
                                 /* Establece el modo de venta de la obra con el valor obtenido del parámetro 
                                 "txtModoVenta" de la solicitud. */
-                                obras.setModo_vent(request.getParameter("ModoVenta"));
+                                obras.setModo_vent(request.getParameter("Modovent"));
                                 
                                 /* Inicia un bloque try-catch para manejar posibles excepciones durante la carga de archivos. */
                                 try {
@@ -206,27 +214,28 @@ public class Mv_Usuarios extends HttpServlet {
                                 List items = fileUpload.parseRequest(request);
                                 
                                 /* Itera sobre la lista de elementos. */
-                                for (int i = 0; i < items.size(); i++) {
+                                
                                     
                                     /* Obtiene el elemento actual de la lista. */
-                                    FileItem fileItem = (FileItem) items.get(i);
+                                    String Url = request.getParameter("Urlimg");
+                                    File archivo = new File(Url);
                                     
                                     /* Verifica si el elemento no es un campo de formulario (es un archivo). */
-                                    if (!fileItem.isFormField()) {
+                                    if (archivo!= null) {
                                         
                                         /* Crea una instancia de File para representar la ubicación donde se guardará el archivo */
-                                        File f = new File("D:\\xampp\\htdocs\\img\\" + fileItem.getName());
+                                        File f = new File("D:\\xampp\\htdocs\\img\\" + archivo.getName());
                                         
                                         /*  Escribe el contenido del archivo en el sistema de archivos. */
-                                        fileItem.write(f);
+                                        
                                         
                                         /* Establece la URL de la imagen asociada a la obra con la ruta del archivo guardado. */
-                                        obras.setUrl("http://localhost/img/"+fileItem.getName());
+                                        obras.setUrl("http://localhost/img/"+f.getName());
                                         
                                         /*  Imprime en la consola la URL de la imagen. */
                                         System.out.println("URL de la imagen: " + obras.getUrl());
                                     } 
-                                }
+                                
                                 /*  Llama al método Agregar_obras de la clase UsuarioDAO para agregar la obra a la base de datos. */
                                 usudao.Agregar_obras(obras);
                                 
@@ -237,7 +246,8 @@ public class Mv_Usuarios extends HttpServlet {
                                 y la respuesta se pasa a la siguiente página, y la ejecución del servlet se interrumpe. */
                              request.getRequestDispatcher("Artista/inicio.jsp").forward(request, response);
                                     break;
-
+                                    
+                        
                         
                         }
                         break;
@@ -380,6 +390,26 @@ public class Mv_Usuarios extends HttpServlet {
                         
                         /*Inicia otro switch interno basado en el valor de accion.*/
                         switch(accion){
+                            
+                            case "Cargar_ob":
+                                
+                                /* Llama al método estático Listar de la clase UsuarioDAO que devuelve una lista de objetos Obras 
+                                y la asigna a la variable obr. */
+                                List<Obras> obr = UsuarioDAO.Listar();
+                                
+                                /* Obtiene la sesión actual de la solicitud y la guarda en la variable sesion. */
+                                HttpSession sesion;
+                                sesion = request.getSession();
+                                
+                                /* Almacena la lista de obras obr en la sesión con el nombre "Obr".*/
+                                sesion.setAttribute("Obr", obr);
+                                
+                                /* Redirige la solicitud a la página "/Artista/inicio.jsp". La información de la solicitud 
+                                y la respuesta se pasa a la siguiente página, y la ejecución del servlet se interrumpe. */
+                                request.getRequestDispatcher("/Comprador/inicio_comprador.jsp").forward(request,response);
+                                
+                                /* Sale del switch interno. */
+                                break;
                             /*Entra en este caso si accion es "subastas".*/
                             case "subastas":
                                 
@@ -406,7 +436,7 @@ public class Mv_Usuarios extends HttpServlet {
                             
                             /*Se crea una lista llamada lista para almacenar los datos del formulario.*/
                             ArrayList<String> lista = new ArrayList<>();
-                            HttpSession sesion = request.getSession();
+                            sesion = request.getSession();
 
                             //String idUsuario = request.getParameter("txt_idUsuario");
 
@@ -478,20 +508,132 @@ public class Mv_Usuarios extends HttpServlet {
                             } catch (Exception e) {
                                 e.printStackTrace(); 
                             }request.getRequestDispatcher("Comprador/Perfil.jsp").forward(request, response);
+                                break;  
+                           
+                             case "AgregarCarrito":
+
+                                sesion = request.getSession();
+                                // Obtener la lista de obras del carrito desde la sesión
+                                List<carrito> listaCarrito = (List<carrito>) sesion.getAttribute("carrito");
+
+                                // Si la lista no existe en la sesión, crear una nueva
+                                if (listaCarrito == null) {
+                                    listaCarrito = new ArrayList<>();
+                                }
+
+                                int idObr = Integer.parseInt(request.getParameter("id"));
+                                System.out.print(idObr);
+
+                                // Buscar la obra en el carrito
+                                carrito car = null;
+                                for (carrito obraEnCarrito : listaCarrito) {
+                                    if (obraEnCarrito.getId_obra() == idObr) {
+                                        car = obraEnCarrito;
+                                        break;
+                                    }
+                                }
+
+                                // Si la obra ya está en el carrito, actualizar la cantidad y el subtotal
+                                if (car != null) {
+                                    int nuevaCantidad = car.getCantidad() + 1;
+                                    car.setCantidad(nuevaCantidad);
+                                    float subtotal = nuevaCantidad * car.getValor_obra();
+                                    car.setSubtotal(subtotal);
+                                } else {
+                                    // Si la obra no está en el carrito, agregar una nueva obra al carrito
+                                    Obras obra = usudao.ListarOb_id(idObr);
+                                    car = new carrito();
+                                    car.setId_obra(idObr);
+                                    car.setNombre_obra(obra.getNombre_obra());
+                                    car.setUrl(obra.getUrl());
+                                    car.setDescripcion_obra(obra.getDescripcion_obra());
+                                    car.setValor_obra(obra.getValor_obra());
+                                    car.setCantidad(1);
+                                    car.setSubtotal(car.getValor_obra()); // Subtotal es el valor de la obra ya que es la primera vez que se agrega
+                                    listaCarrito.add(car);
+                                }
+
+                                // Guardar la lista actualizada en la sesión
+                                sesion.setAttribute("carrito", listaCarrito);
+
+                                System.out.print(listaCarrito);
+                                response.sendRedirect("Comprador/inicio_comprador.jsp");
                                 break;
+                                
+                             case "verlistado":
+                                 response.sendRedirect("Comprador/carrito_compras.jsp");
+                                 break;
+                                
                             
-                            /*Entra en este caso si accion es "InicioComp".*/
-                            case "InicioComp":
-                                /*Redirige la solicitud a la página "/Comprador/inicio_comprador.jsp".*/
-                                 request.getRequestDispatcher("Comprador/inicio_comprador.jsp").forward(request, response);
+                            case"PropuestaSubasta":
+                                
+                            int idObra = Integer.parseInt(request.getParameter("id"));
+                            Obras obra = new Obras();
+                            obra = usudao.ListarOb_id(idObra);
+                            LocalDate fechaActual = LocalDate.now();
+
+                            // Formatea la fecha en el formato "YYYY-MM-DD"
+                            String fechaActualFormateada = fechaActual.format(DateTimeFormatter.ISO_DATE);
+                            System.out.print(fechaActual);
+
+                            // Crea una instancia de la clase subastas
+                            subastas subasta = new subastas();
+
+                            // Establece la fecha actual como una cadena
+                            subasta.setFecha_actual(fechaActualFormateada);
+                            System.out.println(subasta.getFecha_actual());
+                            obra.setFecha_subasta(subasta.getFecha_actual());
+                            
+                            
+                            
+                            sesion = request.getSession();
+                            sesion.setAttribute("ObrasSubasta", obra);
+                            
+                            
+                            response.sendRedirect("Comprador/subastas.jsp");
                                 break;
+                                
+                        case "subastainsert":
+                            System.out.print("llega a insertarsubastas");
+
+                            float valor_Ofrecido = Float.parseFloat(request.getParameter("txtValorOfrecido"));
+                            float Valor_Ini = Float.parseFloat(request.getParameter("valorIni"));
+                            String fecha = request.getParameter("fecha");
+                            String idComp = request.getParameter("txtIdComp");
+                            String idArt = request.getParameter("txtIdArt");
+                            int idObras = Integer.parseInt(request.getParameter("txtIdObr"));
                             
-                            /*Entra en este caso si accion es "cargarsub".*/
-                            case "cargarsub":
-                                /*Redirige la solicitud a la página "/Comprador/subastas.jsp".*/
-                                request.getRequestDispatcher("Comprador/subastas.jsp").forward(request, response);
+                            System.out.print("El valor ofrecido es de: "+valor_Ofrecido);
+                            System.out.print("El valor ofrecido es de: "+Valor_Ini);
+                            System.out.print("El id del comprador es: "+idComp);
+                            System.out.print("El id del artista es: "+idArt);
+                            System.out.print("El id de la obra es: "+idObras);
+                            System.out.print("la fecha de la obra es: "+ fecha);
+                            
+                            if(valor_Ofrecido > Valor_Ini ){
+                                
+                                subasta = new subastas();
+                                subasta.setIdObras(idObras);
+                                subasta.setIdArt(idArt);
+                                subasta.setIdComp(idComp);
+                                subasta.setValor_Ini(Valor_Ini);
+                                subasta.setValor_Ofrecido(valor_Ofrecido);
+                                subasta.setFecha_actual(fecha);
+                                
+                                usudao.Agregar_subastas(subasta);
+                                
+                                
+                                sesion = request.getSession();
+                                sesion.setAttribute("ofertaExitosa", true);
+                                DocumentoComp = subasta.getIdComp();
+                                response.sendRedirect("Comprador/subastas.jsp");
+
+                            }
+
+                            break;
+      
                         }
-                    
+            
                 }
             
             }

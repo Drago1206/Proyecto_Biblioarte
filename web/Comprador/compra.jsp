@@ -4,6 +4,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+             <link rel="stylesheet" href="StylesComprador/encabezado.css">
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <title>JSP Page</title>
     </head>
     <body>
@@ -22,7 +25,7 @@
                     <input type="text" class="search-input" placeholder="Buscar">
                     <button class="search-button">
                         <i class="fas fa-search icon ">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="25" viewBox="0,0,256,256">
+                           
                             <g fill="#fffefe" fill-rule="nonzero" stroke="none" stroke-width="1
                             " stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M21,3c-9.37891,0 -17,7.62109 -17,17c0,9.37891 7.62109,17 17,17c3.71094,0 7.14063,-1.19531 9.9375,-3.21875l13.15625,13.125l2.8125,-2.8125l-13,-13.03125c2.55469,-2.97656 4.09375,-6.83984 4.09375,-11.0625c0,-9.37891 -7.62109,-17 -17,-17zM21,5c8.29688,0 15,6.70313 15,15c0,8.29688 -6.70312,15 -15,15c-8.29687,0 -15,-6.70312 -15,-15c0,-8.29687 6.70313,-15 15,-15z"></path></g></g>
     
@@ -78,9 +81,7 @@
                             <th>CODIGO DE COMPRA</th>                               
                             <th>Fecha de Compra</th>
                             <th>Monto</th>                                                   
-                            <th>Codigo de Pago</th>                                                   
-                            <th>Estado</th>                                                   
-                            <th></th>                                                   
+                            <th>Codigo de Pago</th>                                                                                                                                                   
                         </tr>
                     </thead>
                     <tbody>
@@ -90,10 +91,7 @@
                                 <td>${p.getFecha()}</td>
                                 <td>${p.getMonto()}</td>                                                                                                       
                                 <td>P00${p.getIdPago()}</td>                                                                                                       
-                                <td>${p.getEstado()}</td>                                                                                                       
-                                <td>
-                                    <a href="Controlador?accion=verDetalle&idcompra=${p.getId()}">Ver Detalle</a>
-                                </td>                                                                                                       
+                                <td>${p.getEstado()}</td>                                                                                                                                                                                                             
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -101,76 +99,5 @@
             </div>          
         </div> 
 
-        <!-- Modal Iniciar Session o Registrarse -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="container col-lg-9">                   
-                    <div class="modal-content">                   
-                        <div class="pr-2 pt-1">                         
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                            </button>                    
-                        </div>
-                        <div class="text-center">                         
-                            <img src="img/user.png" width="100" height="100">                         
-                        </div>
-                        <div class="modal-header text-center">                      
-                            <ul class="nav nav-pills">                           
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="pill" href="#pills-iniciar">Iniciar Sesion</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#pills-registrar">Registrarse</a>
-                                </li>                          
-                            </ul>  
-                        </div>
-                        <div class="modal-body"> 
-                            <div class="tab-content" id="pills-tabContent">
-                                <!-- Iniciar Session -->
-                                <div class="tab-pane fade show active" id="pills-iniciar" role="tabpanel">
-                                    <form action="Controlador">
-                                        <div class="form-group">
-                                            <label>Email address</label>
-                                            <input type="email" name="txtemail" class="form-control" placeholder="email@example.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input type="password" name="txtpass" class="form-control" placeholder="Password">
-                                        </div>                                   
-                                        <button type="submit" name="accion" value="Validar" class="btn btn-danger btn-block">Iniciar</button>
-                                    </form>
-                                </div>
-                                <!-- Registrarse -->
-                                <div class="tab-pane fade" id="pills-registrar" role="tabpanel">
-                                    <form action="Controlador">                               
-                                        <div class="form-group">
-                                            <label>Nombres</label>
-                                            <input type="text" name="txtnom" class="form-control" placeholder="Leo Perez">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Dni</label>
-                                            <input type="number" name="txtdni" class="form-control" placeholder="01245678">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Direccion</label>
-                                            <input type="text" name="txtdire" class="form-control" placeholder="Chiclayo - La Victoria">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email address</label>
-                                            <input type="email" name="txtemail" class="form-control" placeholder="email@example.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input type="password" name="txtpass" class="form-control" placeholder="Password">
-                                        </div>                                  
-                                        <button type="submit" data-toggle="modal" data-target="#myModal" name="accion" value="Registrar" class="btn btn-danger btn-block">Crear Cuenta</button>
-                                    </form>
-                                </div>                          
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
 </html>
