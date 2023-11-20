@@ -7,6 +7,9 @@ package controlador;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +34,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
 
 /*  Esta anotación indica al contenedor web que la clase Mv_Usuarios se asociará con la URL "/Mv_Usuarios". 
 La anotación @WebServlet se utiliza en aplicaciones web Java para definir un servlet. */
@@ -224,7 +228,7 @@ public class Mv_Usuarios extends HttpServlet {
                                     if (archivo!= null) {
                                         
                                         /* Crea una instancia de File para representar la ubicación donde se guardará el archivo */
-                                        File f = new File("D:\\xampp\\htdocs\\img\\" + archivo.getName());
+                                        File f = new File("C:\\xampp\\htdocs\\img\\" + archivo.getName());
                                         
                                         /*  Escribe el contenido del archivo en el sistema de archivos. */
                                         
@@ -276,21 +280,34 @@ public class Mv_Usuarios extends HttpServlet {
                             //String idUsuario = request.getParameter("txt_idUsuario");
                             
                             /* Imprime en la consola el ID del usuario obtenido del parámetro "id" de la solicitud. */
-                            System.out.print("El id usuario : "+ request.getParameter("id"));
+                            System.out.print("El id usuario : "+ request.getParameter("IdUsu"));
                             
                             /* Imprime en la consola el nombre de usuario obtenido del parámetro "alias" de la solicitud */
-                            System.out.print("El nombre usuario : "+ request.getParameter("alias"));
+                            System.out.print("El nombre usuario : "+ request.getParameter("Name"));
+                            System.out.print("El Apodo usuario : "+ request.getParameter("Alias"));
+                            System.out.print("El correo usuario : "+ request.getParameter("correo"));
+                            System.out.print("El telefono usuario : "+ request.getParameter("Telefono"));
+                            System.out.print("El Nivel formacion usuario : "+ request.getParameter("levelF"));
+                            System.out.print("El nombre ficha usuario : "+ request.getParameter("Nameficha"));
+                            System.out.print("El nro ficha  usuario : "+ request.getParameter("Nroficha"));
+                            System.out.print("El img usuario : "+ request.getParameter("Urlimg"));
+                            String img = request.getParameter("Urlimg");
+                            
                             
                             /* Agrega el ID del usuario a la lista. */
-                            lista.add(request.getParameter("id"));
+                            lista.add(request.getParameter("IdUsu"));
                             /* Agrega el nombre del usuario a la lista. */
-                            lista.add(request.getParameter("name"));
+                            lista.add(request.getParameter("Name"));
                             /* Agrega el alias del usuario a la lista. */
-                            lista.add(request.getParameter("alias"));
+                            lista.add(request.getParameter("Alias"));
                             /*  Agrega el correo del usuario a la lista. */
                             lista.add(request.getParameter("correo"));
                             /* Agrega el teléfono del usuario a la lista. */
-                            lista.add(request.getParameter("tel"));
+                            lista.add(request.getParameter("Telefono"));
+                            lista.add(request.getParameter("levelF"));
+                            lista.add(request.getParameter("Nameficha"));
+                            lista.add(request.getParameter("Nroficha"));
+                            
                             
 
                                 /*Establece el ID del usuario artista utilizando el primer elemento de la lista convertido a un valor entero.*/ 
@@ -304,57 +321,53 @@ public class Mv_Usuarios extends HttpServlet {
                                 /*Establece el teléfono del usuario artista utilizando el quinto elemento de la lista.*/
                                 art.setTelefono(lista.get(4));
                                 /* Imprime en la consola el primer elemento de la lista (el ID del usuario).*/
-                                System.out.print(lista.get(0));
+                                art.setNivel_Formacion(lista.get(5));
+                                art.setNumero_Ficha(lista.get(6));
+                                art.setNombre_Ficha(lista.get(7));
+                                
+                                
                                 
                                 
                             /*Inicia un bloque try-catch para manejar posibles excepciones durante la carga de archivos*/
+                               
                             try {
-                                
-                                /*Crea una instancia de DiskFileItemFactory para gestionar los elementos de archivo en la solicitud.*/
-                                 FileItemFactory file = new DiskFileItemFactory();
-                                 
-                                 /*Crea una instancia de ServletFileUpload para manejar la carga de archivos utilizando 
-                                 la fábrica de elementos de archivo.*/
-                                ServletFileUpload fileUpload = new ServletFileUpload(file);
-                                
-                                /*Obtiene la lista de elementos (campos de formulario y archivos) de la solicitud.*/
-                                List items = fileUpload.parseRequest(request);
+                                /* Crea una instancia de DiskFileItemFactory para gestionar los elementos de archivo en la solicitud. */
 
-                                /* Itera sobre la lista de elementos.*/
-                                for (Object item : items) {
-                                    
-                                    /*Obtiene el elemento actual de la lista.*/
-                                    FileItem fileItem = (FileItem) item;
-                                    
-                                    /*Verifica si el elemento no es un campo de formulario (es un archivo).*/
-                                    if (!fileItem.isFormField()) {
-                                        // Obtener el nombre del archivo
-                                        String fileName = fileItem.getName();
-                                            /* Imprime en la consola el nombre del archivo.*/
-                                            System.out.print("El nombre del archivo es"+fileName);
-                                        /* Verifica si el nombre del archivo no es nulo ni está vacío. */
-                                        if (fileName != null && !fileName.isEmpty()) {
-                                            // Guardar el archivo en el servidor
-                                            File f = new File("D:\\xampp\\htdocs\\img\\" + fileName);
-                                            /* Escribe el contenido del archivo en el sistema de archivos.*/
-                                            fileItem.write(f);
+                                /* Verifica si el elemento no es un campo de formulario (es un archivo). */
+                                if (img != null) {
+                                    // Obtener el nombre del archivo sin la ruta completa
+                                    String nombreArchivo = new File(img).getName();
 
-                                            // Configurar la URL de la imagen en el objeto art
-                                            art.setImg_perfil("http://localhost/img/" + fileName);
-                                            /*Imprime en la consola la URL de la imagen de perfil.*/
-                                            System.out.println("URL de la imagen: " + art.getImg_perfil());
-                                        }
-                                    } else {
-                                        lista.add(fileItem.getString());
+                                    /* Imprime en la consola el nombre del archivo. */
+                                    System.out.println("El nombre del archivo es " + nombreArchivo);
+
+                                    /* Verifica si el nombre del archivo no es nulo ni está vacío. */
+                                    if (!nombreArchivo.isEmpty()) {
+                                        // Guardar el archivo en el servidor
+                                        File f = new File("C:\\xampp\\htdocs\\img\\" + nombreArchivo);
+                                        String narchivo = "C:/xampp/htdocs/img/" + nombreArchivo;
+                                        // Copiar el contenido del na en el sistema de archivos
+                                         Files.copy(new File(narchivo).toPath(), f.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+
+                                        // Configurar la URL de la imagen en el objeto art
+                                        art.setImg_perfil("http://localhost/img/" + nombreArchivo);
+                                        /* Imprime en la consola la URL de la imagen de perfil. */
+                                        System.out.println("URL de la imagen: " + art.getImg_perfil());
                                     }
+                                } else {
+                                    // Agregar un valor a la lista en caso de que no sea un campo de archivo
+                                    lista.add("Valor predeterminado para el caso en que no sea un archivo");
                                 }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                                    
                                 /*Llama al método Actualizar_ArtPerfil de la clase UsuarioDAO para actualizar el perfil 
                                 del artista en la base de datos.*/
                                 UsuarioDAO.Actualizar_ArtPerfil(art);
                                 
-                            } catch (Exception e) {
-                                e.printStackTrace(); 
-                            }
+                            
                             /*Redirige la solicitud a la página "/Artista/Configuracion.jsp". La información de la solicitud 
                             y la respuesta se pasa a la siguiente página, y la ejecución del servlet se interrumpe*/
                              request.getRequestDispatcher("Artista/Configuracion.jsp").forward(request, response);
@@ -366,10 +379,11 @@ public class Mv_Usuarios extends HttpServlet {
                                 
                                 /*Obtiene la sesión actual de la solicitud y la guarda en la variable sesion.*/
                                 sesion = request.getSession();
-                                
+                                int id = Integer.parseInt(request.getParameter("id"));
+                                System.out.print("El id de usuario es de: "+id);
                                 /*Llama al método Listar_id de la clase UsuarioDAO para obtener 
                                 la información del artista con ID 52 y guarda el resultado en la variable Art.*/
-                                Artistas Art=usudao.Listar_id(52);
+                                Artistas Art=usudao.Listar_id(id);
                                 
                                 /*Almacena el objeto Art en la sesión con el nombre de atributo "Art".
                                 Esto permitirá que esta información esté disponible en otras partes del código o en otras solicitudes.*/
@@ -432,83 +446,100 @@ public class Mv_Usuarios extends HttpServlet {
                             
                             /*Se crea una nueva instancia de la clase Compradores llamada comp.*/
                             comp = new Compradores();
-                            System.out.print("Llega a Actualizar");
+                                 System.out.print("Llega a Actualizar");
                             
-                            /*Se crea una lista llamada lista para almacenar los datos del formulario.*/
+                            /*Crea una nueva instancia de ArrayList para almacenar los datos del formulario que se están actualizando*/
                             ArrayList<String> lista = new ArrayList<>();
+                            
+                            /* Obtiene la sesión actual de la solicitud y la guarda en la variable sesion. */
                             sesion = request.getSession();
 
                             //String idUsuario = request.getParameter("txt_idUsuario");
-
-                            System.out.print("El id usuario : "+ request.getParameter("id"));
-                            System.out.print("El nombre usuario : "+ request.getParameter("alias"));
                             
-                            /*Se obtienen los valores de los parámetros "id", "name", "alias", 
-                            "correo" y "tel" de la solicitud y se almacenan en la lista lista.*/
-                            lista.add(request.getParameter("id"));
-                            lista.add(request.getParameter("name"));
-                            lista.add(request.getParameter("alias"));
+                            /* Imprime en la consola el ID del usuario obtenido del parámetro "id" de la solicitud. */
+                            System.out.print("El id usuario : "+ request.getParameter("IdUsu"));
+                            /* Imprime en la consola el nombre de usuario obtenido del parámetro "alias" de la solicitud */
+                            System.out.print("El nombre usuario : "+ request.getParameter("Name"));
+                            System.out.print("El correo usuario : "+ request.getParameter("correo"));
+                            System.out.print("El telefono usuario : "+ request.getParameter("Telefono"));
+                            System.out.print("El img usuario : "+ request.getParameter("Urlimg"));
+                            String img = request.getParameter("Urlimg");
+                            
+                            
+                            /* Agrega el ID del usuario a la lista. */
+                            lista.add(request.getParameter("IdUsu"));
+                            /* Agrega el nombre del usuario a la lista. */
+                            lista.add(request.getParameter("Name"));
+                            /* Agrega el alias del usuario a la lista. */
+                            /*  Agrega el correo del usuario a la lista. */
                             lista.add(request.getParameter("correo"));
-                            lista.add(request.getParameter("tel"));
+                            /* Agrega el teléfono del usuario a la lista. */
+                            lista.add(request.getParameter("Telefono"));
+                            
+                            
                             
 
-                                /*Se establecen las propiedades de la instancia comp con los valores obtenidos de la lista.*/ 
-                                /*Se imprime en la consola el valor del primer elemento de la lista.*/
+                                /*Establece el ID del usuario artista utilizando el primer elemento de la lista convertido a un valor entero.*/ 
                                 comp.setIdUsuario(Integer.parseInt(lista.get(0)));
+                                /*Establece el nombre del usuario artista utilizando el segundo elemento de la lista.*/
                                 comp.setNombreUsuario(lista.get(1));
-                                comp.setPseudonombre(lista.get(2));
-                                comp.setCorreoUsuario(lista.get(3));
-                                comp.setTelefono(lista.get(4));
-                                System.out.print(lista.get(0));
+                                /* Establece el pseudónimo del usuario artista utilizando el tercer elemento de la lista.*/
+                                
+                                /*Establece el correo del usuario artista utilizando el cuarto elemento de la lista.*/
+                                comp.setCorreoUsuario(lista.get(2));
+                                /*Establece el teléfono del usuario artista utilizando el quinto elemento de la lista.*/
+                                comp.setTelefono(lista.get(3));
+                                /* Imprime en la consola el primer elemento de la lista (el ID del usuario).*/
                                 
                                 
-                            /* Inicia un bloque try-catch para manejar posibles excepciones durante la carga de archivos.*/
+                                
+                                
+                                
+                            /*Inicia un bloque try-catch para manejar posibles excepciones durante la carga de archivos*/
+                               
                             try {
-                                
-                                /* Crea una instancia de DiskFileItemFactory para gestionar los elementos de archivo en la solicitud.*/
-                                 FileItemFactory file = new DiskFileItemFactory();
-                                 
-                                /*Crea una instancia de ServletFileUpload para manejar la carga de archivos utilizando 
-                                 la fábrica de elementos de archivo.*/
-                                ServletFileUpload fileUpload = new ServletFileUpload(file);
-                                
-                                /*Obtiene la lista de elementos (campos de formulario y archivos) de la solicitud.*/
-                                List items = fileUpload.parseRequest(request);
+                                /* Crea una instancia de DiskFileItemFactory para gestionar los elementos de archivo en la solicitud. */
 
-                                /* Itera sobre la lista de elementos.*/
-                                for (Object item : items) {
-                                    
-                                    /* Obtiene el elemento actual de la lista.*/
-                                    FileItem fileItem = (FileItem) item;
-                                    
-                                    /*Verifica si el elemento no es un campo de formulario (es un archivo).*/
-                                    if (!fileItem.isFormField()) {
-                                        // Obtener el nombre del archivo
-                                        String fileName = fileItem.getName();
-                                            System.out.print("El nombre del archivo es"+fileName);
-                                        if (fileName != null && !fileName.isEmpty()) {
-                                            // Guardar el archivo en el servidor
-                                            File f = new File("D:\\xampp\\htdocs\\img\\" + fileName);
-                                            fileItem.write(f);
+                                /* Verifica si el elemento no es un campo de formulario (es un archivo). */
+                                if (img != null) {
+                                    // Obtener el nombre del archivo sin la ruta completa
+                                    String nombreArchivo = new File(img).getName();
 
-                                            //Configura la URL de la imagen de perfil en el objeto comp utilizando la ruta del archivo guardado.
-                                            comp.setImg_perfil("http://localhost/img/" + fileName);
-                                            /*Imprime en la consola la URL de la imagen de perfil.*/
-                                            System.out.println("URL de la imagen: " + comp.getImg_perfil());
-                                        }
-                                    /*Si el elemento es un campo de formulario, se agrega su valor a la lista lista.*/
-                                    } else {
-                                        lista.add(fileItem.getString());
+                                    /* Imprime en la consola el nombre del archivo. */
+                                    System.out.println("El nombre del archivo es " + nombreArchivo);
+
+                                    /* Verifica si el nombre del archivo no es nulo ni está vacío. */
+                                    if (!nombreArchivo.isEmpty()) {
+                                        // Guardar el archivo en el servidor
+                                        File f = new File("C:\\xampp\\htdocs\\img\\" + nombreArchivo);
+                                        String narchivo = "C:/xampp/htdocs/img/" + nombreArchivo;
+                                        // Copiar el contenido del na en el sistema de archivos
+                                         Files.copy(new File(narchivo).toPath(), f.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+
+                                        // Configurar la URL de la imagen en el objeto art
+                                        comp.setImg_perfil("http://localhost/img/" + nombreArchivo);
+                                        /* Imprime en la consola la URL de la imagen de perfil. */
+                                        System.out.println("URL de la imagen: " + comp.getImg_perfil());
                                     }
+                                } else {
+                                    // Agregar un valor a la lista en caso de que no sea un campo de archivo
+                                    lista.add("Valor predeterminado para el caso en que no sea un archivo");
                                 }
-                             
-                                UsuarioDAO.ActualizarCompPerfil(comp);
-                            /* Captura y maneja cualquier excepción que pueda ocurrir durante la carga de archivos, 
-                                imprimiendo el rastreo de la pila en la consola.*/    
                             } catch (Exception e) {
-                                e.printStackTrace(); 
-                            }request.getRequestDispatcher("Comprador/Perfil.jsp").forward(request, response);
-                                break;  
+                                e.printStackTrace();
+                            }
+                                    
+                                /*Llama al método Actualizar_ArtPerfil de la clase UsuarioDAO para actualizar el perfil 
+                                del artista en la base de datos.*/
+                                UsuarioDAO.ActualizarCompPerfil(comp);
+                                
+                            
+                            /*Redirige la solicitud a la página "/Artista/Configuracion.jsp". La información de la solicitud 
+                            y la respuesta se pasa a la siguiente página, y la ejecución del servlet se interrumpe*/
+                             request.getRequestDispatcher("Comprador/Configuracion.jsp").forward(request, response);
+                                    break;
+
                            
                              case "AgregarCarrito":
 

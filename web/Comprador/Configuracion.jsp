@@ -102,7 +102,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <div class="card">
                             <div class="card shadow p-3 mb-5 bg-body rounded">
                                 <div class="card-body">
-                                    <form action="../Mv_Usuarios?menu=Compradores&accion=ConfigPerfil&id=${Comp.getIdUsuario()}&name=${Comp.getNombreUsuario()}&alias=${Comp.getPseudonombre()}&correo=${Comp.getCorreoUsuario()}&tel=${Comp.getTelefono()}" method="post" enctype="multipart/form-data" >
+                                    <form action="" id="formActComp" method="post" enctype="multipart/form-data" >
                                         <div class="coont container">
                                             <div class="mb-3">
                                                 
@@ -120,7 +120,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                     <div class="row">
                                                         <div class="col-md-5 col-sm-2">
                                                             <div class="espaci">
-                                                                <input type="hidden" name="id_usu" value="${Comp.getIdUsuario()}">
+                                                                <input type="hidden" name="id_usu" id="id_usu" value="${Comp.getIdUsuario()}">
                                                                 <p class="text-center" style="color: #00AD00;">Nombre</p>
                                                                 <input type="text" class="form-control" id="nombre" placeholder="Nombre del artista" value="${Comp.getNombreUsuario()}">
                                                             </div>
@@ -141,7 +141,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                             </div>
 
                                                             <div class="text-center mt-5 col-md-7 col-sm-12 ms-5 ps-5">
-                                                                <input type="file"  name="archivo" class="btn1 btn-outline-secondary" style="text-decoration: none; border: 2px solid #00AD00;">
+                                                                <input type="file"  name="img" id="img" class="btn1 btn-outline-secondary" style="text-decoration: none; border: 2px solid #00AD00;">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -170,6 +170,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
 
 </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../JS/ScriptActComp.js"></script>
 </html>
 <%}else{
 response.sendRedirect("index.jsp");

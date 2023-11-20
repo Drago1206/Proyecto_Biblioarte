@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jhoan/Downloads/WebApplication4%20(4)%20(1)/WebApplication4%20(4)/WebApplication4%20(4)/WebApplication4/src/java/controlador/Script.java</file>
-            <file>file:/C:/Users/jhoan/Downloads/WebApplication4%20(4)%20(1)/WebApplication4%20(4)/WebApplication4%20(4)/WebApplication4/web/JS/Script.js</file>
-            <file>file:/C:/Users/jhoan/Downloads/WebApplication4%20(4)%20(1)/WebApplication4%20(4)/WebApplication4%20(4)/WebApplication4/src/java/controlador/Mv_Usuarios.java</file>
+            <file>file:/C:/Users/PERSONAL/Documents/NetBeansProjects/Proyecto_Biblioarte/web/Comprador/Configuracion.jsp</file>
+            <file>file:/C:/Users/PERSONAL/Documents/NetBeansProjects/Proyecto_Biblioarte/src/java/modelo/UsuarioDAO.java</file>
+            <file>file:/C:/Users/PERSONAL/Documents/NetBeansProjects/Proyecto_Biblioarte/web/JS/ScriptAct.js</file>
+            <file>file:/C:/Users/PERSONAL/Documents/NetBeansProjects/Proyecto_Biblioarte/src/java/controlador/Mv_Usuarios.java</file>
+            <file>file:/C:/Users/PERSONAL/Documents/NetBeansProjects/Proyecto_Biblioarte/web/Artista/Configuracion.jsp</file>
+            <file>file:/C:/Users/PERSONAL/Documents/NetBeansProjects/Proyecto_Biblioarte/web/JS/ScriptActComp.js</file>
         </group>
     </open-files>
 </project-private>

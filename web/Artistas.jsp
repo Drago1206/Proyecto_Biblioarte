@@ -8,7 +8,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <link rel="stylesheet" href="Artistas.css"/>
+        <link href="css/Artistas.css" rel="stylesheet" type="text/css"/>
         <title>Hello, world!</title>
     </head>
     <body>
@@ -157,7 +157,7 @@
                                 <th>${Art.getTipoDocumento()}</th>
                                 <td>${Art.getNroDocumento()}</td>
                                 <td>${Art.getNombreUsuario()}</td>
-                                <td><img src="${Art.getImg_perfil()}" alt="alt"/></td>
+                                <td class="rect"><img src="${Art.getImg_perfil()}" alt="alt"/></td>
                                 <td>${Art.getPseudonombre()}</td>
                                 <td>${Art.getCorreoUsuario()}</td>
                                 <td>${Art.getContrasena()}</td>

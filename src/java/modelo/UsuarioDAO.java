@@ -551,7 +551,10 @@ public class UsuarioDAO {
             ps.setString(3, art.getTelefono());        
             ps.setString(4, art.getPseudonombre());
             ps.setString(5, art.getImg_perfil());
-            System.out.print(art.getImg_perfil());
+            System.out.print(art.getCorreoUsuario());
+            System.out.print(art.getTelefono());
+            System.out.print(art.getPseudonombre());
+            System.out.print(art.getNombreUsuario());
             
             
             ps.executeUpdate();

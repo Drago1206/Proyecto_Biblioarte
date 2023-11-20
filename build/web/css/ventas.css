@@ -3,13 +3,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 30/10/2023, 04:51:23 AM
-    Author     : jhoan
+    Created on : 20/11/2023, 01:10:04 AM
+    Author     : PERSONAL
 */
-.navbar navbar-expand-lg{
-    width: 100%;
-    
-}
 
 .rect{
     width: 10rem;
@@ -22,4 +18,3 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     height: 100%;
     object-fit: cover;
 }
-

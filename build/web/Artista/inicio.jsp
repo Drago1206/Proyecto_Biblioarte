@@ -19,8 +19,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="Artista/StylesArtista/inicio_pagina.css">
-    <link rel="stylesheet" href="Artista/StylesArtista/encabezado.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Artista/StylesArtista/inicio_pagina.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Artista/StylesArtista/encabezado.css">
 
 	<!-- Fuentes -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,7 +81,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
                             <li><a class="dropdown-item" href="Artista/Perfil.jsp" ><img class="icon" src="Artista/Iconos/mi_cuenta.png">  Mi cuenta</a></li>
 
-                            <li><a class="dropdown-item" href="/Biblioarte/Mv_Usuarios?menu=Perfil&accion=Cargar"><img class="icon"  src="Artista/Iconos/Config.png" >  Configuracion</a></li>
+                            <li><a class="dropdown-item" href="/Biblioarte/Mv_Usuarios?menu=Perfil&accion=Cargar&id=${Artista.getId()}"><img class="icon"  src="Artista/Iconos/Config.png" >  Configuracion</a></li>
 
                             <li><a class="dropdown-item" href="/Biblioarte/Script?menu=SubastasArt&accion=versub&document=${Artista.getDocumento()}"><img class="icon"  src="Artista/Iconos/negocia.png" >  Negociaciones</a></li>
                             

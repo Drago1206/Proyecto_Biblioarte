@@ -19,12 +19,10 @@ body{
     border: none;
 }
 
-
 /* Ajustamos los tamaños al contenedor de la imagen de perfil */
 .rectangulo {
-    margin-top: 80rem;
     width: 50%; /* Ancho del 50% del contenedor padre */
-    background-color: #D9D9D9;
+    height:30rem;
     border-radius: 100%; /* Para hacer un círculo */
     margin: auto; /* Centrar horizontalmente y agregar espacio arriba y abajo */
     display: flex;
@@ -33,6 +31,7 @@ body{
     margin-left: 10rem;
     overflow: hidden;
 }
+
 
 /* Se ajusta la imagen al contenedor */
 .rectangulo img {

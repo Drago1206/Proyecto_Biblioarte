@@ -10,3 +10,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     width: 100%;
     
 }
+
+.rect{
+    width: 10rem;
+    height: 10rem;
+        border-radius: 5%;
+}
+
+/* Se adapta la imagen al tamaño del contenedor */
+.rect img {
+    height: 100%;
+    object-fit: cover;
+}
+

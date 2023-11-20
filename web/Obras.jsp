@@ -9,6 +9,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link href="all.css" rel="stylesheet"> <!--load all styles -->
+        <link href="css/obras.css" rel="stylesheet" type="text/css"/>
         <title>Hello, world!</title>
     </head>
     <body>
@@ -113,7 +114,7 @@
                             <td>${obras.getArtista().getNombreUsuario()}</td>
                             <td>${obras.getArtista().getNroDocumento()}</td>
                             <td>${obras.getNombre_obra()}</td>
-                            <td><img src="${obras.getUrl()}" alt="alt"/></td>
+                            <td class="rect"><img src="${obras.getUrl()}" alt="alt"/></td>
                             <td>${obras.getTecnica()}</td>
                             <td>${obras.getDescripcion_obra()}</td>
                             <td>${obras.getValor_obra()}</td>
